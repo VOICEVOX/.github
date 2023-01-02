@@ -6,4 +6,7 @@ VOICEVOX では、キャラクターの要素（声や見た目）を含まな�
 
 <img src="./res/構成.svg" width="480">
 
+<!-- 修正時はエディタ側のドキュメントも修正 -->
+<!-- https://github.com/VOICEVOX/voicevox/blob/main/docs/%E5%85%A8%E4%BD%93%E6%A7%8B%E6%88%90.md -->
+
 [詳細はこちら](https://github.com/VOICEVOX/voicevox/blob/main/docs/%E5%85%A8%E4%BD%93%E6%A7%8B%E6%88%90.md)
