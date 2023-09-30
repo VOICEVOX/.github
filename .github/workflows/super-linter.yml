@@ -1,0 +1,38 @@
+# https://github.com/super-linter/super-linter/blob/main/TEMPLATES/linter.yml
+---
+name: Super Linter
+
+on:
+  workflow_call:
+    inputs:
+      env_vars:
+        type: string
+        description: "env_name=env_value,..."
+
+jobs:
+  super-linter:
+    name: Super Linter
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: read
+      statuses: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 差分を取得するために必要
+
+      - name: Setup Environment Variables
+        if: ${{ inputs.env_vars }}
+        run: for line in "${{ inputs.env_vars }}"; do echo "$line" >> $GITHUB_ENV; done
+
+      - name: Lint Code Base
+        uses: super-linter/super-linter/slim@v5
+        env:
+          VALIDATE_ALL_CODEBASE: true # すべてのファイルを検証する。
+          VALIDATE_JSCPD: false # コピペ検出。厳しすぎるので無効化。
+          VALIDATE_NATURAL_LANGUAGE: false # 自然言語検出。英語のみなので無効化。
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
