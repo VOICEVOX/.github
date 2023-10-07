@@ -1,0 +1,19 @@
+name: VOICEVOX Shared Workflow
+
+on:
+  workflow_call:
+    inputs:
+      super_linter_env_vars:
+        type: string
+        description: "super linter用の環境変数定義。複数行のenv_name=env_value"
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  super-linter:
+    name: Super Linter
+    uses: VOICEVOX/.github/.github/workflows/super-linter.yml@main
+    with:
+      env_vars: ${{ inputs.super_linter_env_vars }}
