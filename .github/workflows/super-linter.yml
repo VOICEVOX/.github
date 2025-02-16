@@ -27,10 +27,13 @@ jobs:
 
       - name: Setup Environment Variables
         if: ${{ inputs.env_vars }}
-        run: for line in "${{ inputs.env_vars }}"; do echo "$line" >> $GITHUB_ENV; done
+        run: |
+          while IFS= read -r line || [ -n "$line" ]; do
+            echo "$line" >> "$GITHUB_ENV"
+          done <<< "${{ inputs.env_vars }}"
 
       - name: Lint Code Base
-        uses: super-linter/super-linter/slim@v5
+        uses: super-linter/super-linter/slim@v7
         env:
           VALIDATE_ALL_CODEBASE: true # すべてのファイルを検証する。
           VALIDATE_JSCPD: false # コピペ検出。厳しすぎるので無効化。
