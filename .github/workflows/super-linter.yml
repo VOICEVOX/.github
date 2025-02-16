@@ -27,7 +27,7 @@ jobs:
 
       - name: Setup Environment Variables
         if: ${{ inputs.env_vars }}
-        run: for line in "${{ inputs.env_vars }}"; do echo "$line" >> $GITHUB_ENV; done
+        run: for line in "${{ inputs.env_vars }}"; do echo "$line" >> "$GITHUB_ENV"; done
 
       - name: Lint Code Base
         uses: super-linter/super-linter/slim@v7
